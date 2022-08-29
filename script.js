@@ -30,7 +30,7 @@ function estaON() {
   estado.then(userOnline);
   estado.catch(userAFK);
 }
-//setInterval(estaON, 5000);
+
 
 function userOnline() {
   //Está on ainda
@@ -59,7 +59,12 @@ function mensagensSucesso(resposta) {
   let mensagensAtuais = document.querySelector(".conteudo");
   mensagensAtuais.innerHTML = "";
 
+  
+
   for (let i = 0; i < resposta.data.length; i++) {
+
+    
+    
     if (resposta.data[i].type === "private_message") {
       if (
         resposta.data[i].from == nome.name ||
@@ -87,6 +92,9 @@ function mensagensSucesso(resposta) {
     } else {
       console.log("Deu erro para colocar as mensagens");
     }
+    
+    let aparece = document.querySelector('.conteudo')
+    aparece.scrollIntoView(false);
     // console.log(resposta.data[i].from)
     // console.log(resposta.data[i].to)
     // console.log(resposta.data[i].time)
@@ -96,6 +104,7 @@ function mensagensSucesso(resposta) {
 }
 function desconectado() {
   alert("Você foi desconectado da sala, vamos te reconectar");
+  window.location.reload()
 }
 
 function enviarMensagens() {
@@ -115,6 +124,7 @@ function enviarMensagens() {
   promise.then(buscarMensagens);
   promise.catch(desconectado);
 }
+
 
 setInterval(buscarMensagens, 3000);
 setInterval(estaON, 5000);

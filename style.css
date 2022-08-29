@@ -63,6 +63,10 @@ body {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
+  word-wrap: break-word;
+  flex-wrap: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mensagem-privada {
@@ -80,6 +84,10 @@ body {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
+  word-wrap: break-word;
+  flex-wrap: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .mensagem-status {
   width: 100%;
@@ -96,6 +104,10 @@ body {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
+  word-wrap: break-word;
+  flex-wrap: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .mensagem-no-chat {
   color: #000000;
@@ -103,6 +115,10 @@ body {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
+  word-wrap: break-word;
+  flex-wrap: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .horario {
   margin-right: 5px;
@@ -111,6 +127,10 @@ body {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
+  word-wrap: break-word;
+  flex-wrap: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .conteudo span {
