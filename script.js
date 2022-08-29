@@ -54,16 +54,21 @@ function mensagensSucesso(resposta) {
   //time from sai da sala...
   //Se for message, deve por a mensagem em outro formato
   //time from para to: text
+  console.log(nome)
   let mensagensAtuais = document.querySelector(".conteudo");
+  mensagensAtuais.innerHTML = '';
   console.log(mensagensAtuais);
   for (let i = 0; i < resposta.data.length; i++) {
     if (resposta.data[i].type === "private_message") {
+
+        if(resposta.data[i].from == nome.name && resposta.data[i].to == nome.name) {
       mensagensAtuais.innerHTML += `<div class="mensagem-privada">
             <div class="horario">(${resposta.data[i].time})</div>
             <div class="mensagem-no-chat">
               <span>${resposta.data[i].from}</span> reservadamente para <span>${resposta.data[i].to}</span>: ${resposta.data[i].text}
             </div>
           </div>`;
+        }
     } else if (resposta.data[i].type === "status") {
       mensagensAtuais.innerHTML += `<div class="mensagem-status">
           <div class="horario">(${resposta.data[i].time})</div>
