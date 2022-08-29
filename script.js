@@ -3,6 +3,7 @@ let estado;
 let mensagens;
 let msgEscrita;
 nomeUsuario();
+buscarMensagens();
 
 function nomeUsuario() {
   nome = {
@@ -33,10 +34,10 @@ function estaON() {
 
 
 function userOnline() {
-  //Está on ainda
+  console.log("Estou Online");
 }
 function userAFK() {
-  window.location.reload();
+  console.log("Estou afk");
 }
 
 function buscarMensagens() {
