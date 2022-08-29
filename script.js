@@ -1,6 +1,7 @@
 let nome;
 let estado;
 let mensagens;
+let msgEscrita;
 nomeUsuario();
 
 function nomeUsuario() {
@@ -16,7 +17,7 @@ function nomeUsuario() {
 }
 
 function tratarSucesso() {
-    buscarMensagens();
+  buscarMensagens();
 }
 
 function tratarErro() {
@@ -42,8 +43,8 @@ function buscarMensagens() {
   mensagens = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
   mensagens.then(mensagensSucesso);
 }
-setInterval(buscarMensagens, 30000);
-setInterval(estaON, 5000);
+
+
 
 function mensagensSucesso(resposta) {
   //Carregar mensagens dentro do for
@@ -54,21 +55,23 @@ function mensagensSucesso(resposta) {
   //time from sai da sala...
   //Se for message, deve por a mensagem em outro formato
   //time from para to: text
-  console.log(nome)
+
   let mensagensAtuais = document.querySelector(".conteudo");
-  mensagensAtuais.innerHTML = '';
-  console.log(mensagensAtuais);
+  mensagensAtuais.innerHTML = "";
+
   for (let i = 0; i < resposta.data.length; i++) {
     if (resposta.data[i].type === "private_message") {
-
-        if(resposta.data[i].from == nome.name && resposta.data[i].to == nome.name) {
-      mensagensAtuais.innerHTML += `<div class="mensagem-privada">
+      if (
+        resposta.data[i].from == nome.name ||
+        resposta.data[i].to == nome.name
+      ) {
+        mensagensAtuais.innerHTML += `<div class="mensagem-privada">
             <div class="horario">(${resposta.data[i].time})</div>
             <div class="mensagem-no-chat">
               <span>${resposta.data[i].from}</span> reservadamente para <span>${resposta.data[i].to}</span>: ${resposta.data[i].text}
             </div>
           </div>`;
-        }
+      }
     } else if (resposta.data[i].type === "status") {
       mensagensAtuais.innerHTML += `<div class="mensagem-status">
           <div class="horario">(${resposta.data[i].time})</div>
@@ -82,7 +85,7 @@ function mensagensSucesso(resposta) {
             </div>
           </div>`;
     } else {
-        console.log('Deu erro para colocar as mensagens')
+      console.log("Deu erro para colocar as mensagens");
     }
     // console.log(resposta.data[i].from)
     // console.log(resposta.data[i].to)
@@ -91,3 +94,27 @@ function mensagensSucesso(resposta) {
     // console.log(resposta.data[i].type)
   }
 }
+function desconectado() {
+  alert("Você foi desconectado da sala, vamos te reconectar");
+}
+
+function enviarMensagens() {
+  msgEscrita = document.querySelector("input");
+  const msgEnv = {
+    from: nome.name,
+    to: "Todos",
+    text: msgEscrita.value,
+    type: "message",
+  }
+
+  const promise = axios.post(
+    "https://mock-api.driven.com.br/api/v6/uol/messages", msgEnv);
+
+  msgEscrita.value = '';
+
+  promise.then(buscarMensagens);
+  promise.catch(desconectado);
+}
+
+setInterval(buscarMensagens, 3000);
+setInterval(estaON, 5000);
